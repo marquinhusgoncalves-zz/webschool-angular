@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR" data-ng-app="BeMEAN">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ titulo }}</title>
+</head>
+<!-- Iniciando minha aplicação com ng-app -->
+<body>
+  <label for="nome">Seu nome:
+    <input type="text" data-ng-model="nome">
+  </label>
+  <!-- Utilizamos o valor de nome que está no nosso escopo local -->
+  Olá mundo, {{ nome | reverseString | uppercase }}
+  Olá mundo, {{ nome | truncate:5:" leia mais" }}
+
+  <label for="nome">Título da Página:
+    <input type="text" data-ng-model="titulo">
+  </label>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script>
+      angular.module('BeMEAN', [])
+      .filter('reverseString', function() {
+        return function(text) {
+          if(text) return text.split("").reverse().join("");
+        }
+      })
+      .filter('truncate', function() {
+        return function(text, length, end) {
+          if(text) {
+            if(isNaN(length)) length = 10;
+            if(end === undefined) end = " ...";
+            if(text.length <= length) return text;
+            else return String(text).substring(0, length) + end;
+          }
+        };
+      });
+    </script>
+</body>
+</html>
