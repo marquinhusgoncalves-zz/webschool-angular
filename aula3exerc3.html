@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR" data-ng-app="BeMEAN">
+<head>
+  <meta charset="UTF-8">
+  <title>Be MEAN</title>
+</head>
+<!-- Iniciando minha aplicação com ng-app -->
+<body>
+  <div data-ng-controller="UserController as User">
+    <h1>{{ User.titulo }}</h1>
+    <ul>
+      <li data-ng-repeat="user in User.users">
+        {{ user.name }} - {{ user.email }}
+      </li>
+    </ul>
+  </div>
+  <div data-ng-controller="CursoController as Curso">
+    <h1>{{ Curso.titulo }}</h1>
+    <ul>
+      <li data-ng-repeat="curso in Curso.cursos">
+        {{ curso.name }} - {{ curso.teacher }}
+      </li>
+    </ul>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script>
+  angular.module('BeMEAN', [])
+  .controller('UserController', UserController)
+  .controller('CursoController', CursoController);
+
+  function UserController() {
+    var vm = this;
+    vm.titulo = "ALUNOS";
+    vm.users = [
+      {name: 'Marcus', email: 'marcus@oceanoweb.com.br'},
+      {name: 'Vinicius', email: 'vinicius@oceanoweb.com.br'},
+      {name: 'Gonçalves', email: 'goncalves@oceanoweb.com.br'}
+    ];
+  }
+
+  function CursoController() {
+    var vm = this;
+    vm.titulo = "CURSOS";
+    vm.cursos = [
+      {name: 'Javascript', teacher: 'Marcus'},
+      {name: 'Node', teacher: 'Vinicius'},
+      {name: 'Angular', teacher: 'Gonçalves'}
+    ];
+  }
+  </script>
+</body>
+</html>

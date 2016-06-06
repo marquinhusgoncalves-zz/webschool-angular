@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR" data-ng-app="BeMEAN">
+<head>
+  <meta charset="UTF-8">
+  <title>Be MEAN</title>
+</head>
+<!-- Iniciando minha aplicação com ng-app -->
+<body data-ng-controller="UserController">
+  <h1>{{ titulo }}</h1>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script>
+  angular.module('BeMEAN', [])
+  .controller('UserController', [ '$scope', function($scope){
+    $scope.titulo = "Be MEAN";
+  }
+]);
+</script>
+</body>
+</html>
