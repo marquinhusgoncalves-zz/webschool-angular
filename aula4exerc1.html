@@ -8,11 +8,21 @@
 <body>
   <div data-ng-controller="UserController as User">
     <h1>{{ User.titulo }}</h1>
-    <ul>
-      <li data-ng-repeat="user in User.users">
-        {{ user.name | upper }} - {{ user.email }}
-      </li>
-    </ul>
+    <label>Busca: <input ng-model="searchUser"></label>
+    <table>
+      <thead>
+        <tr>
+          <th data-ng-repeat="(key, value) in User.users[0]">{{ key }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="user in User.users | orderBy: 'name' | filter:searchUser">
+          <td data-ng-repeat="(key, value) in user">{{ value | upper }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div data-ng-controller="CursoController as Curso">
     <h1>{{ Curso.titulo }}</h1>
