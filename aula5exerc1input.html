@@ -9,7 +9,22 @@
   <div data-ng-controller="UserController as User">
     <h1>{{ User.titulo }}</h1>
     <label>Busca: <input ng-model="searchUser"></label>
-    <button data-ng-click="User.add()">ADD User</button>
+
+    <p>
+      <label>Nome:
+        <input type="text" data-ng-model="form.User.name">
+      </label>
+      <br>
+      <label>E-Mail:
+        <input type="email" data-ng-model="form.User.email">
+      </label>
+      <br>
+      <label>Idade:
+        <input type="text" data-ng-model="form.User.idade">
+      </label>
+    </p>
+
+    <button data-ng-click="User.add(form.User)">ADD User</button>
     <span data-ng-init="predicate = 'name'"></span>
     <table>
       <thead>
@@ -62,8 +77,9 @@
       {name: 'gonçalves', email: 'goncalves@oceanoweb.com.br', idade: '25'}
     ];
     vm.add = add;
-     function add(){
-       vm.users.push({name: 'Exemplo', email: 'exemplo@exemplo.com', idade: '00'})
+     function add(user){
+       console.log('user', user);
+       vm.users.push(user);
      }
   }
 

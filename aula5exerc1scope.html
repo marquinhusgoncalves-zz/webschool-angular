@@ -6,37 +6,37 @@
 </head>
 <!-- Iniciando minha aplicação com ng-app -->
 <body>
-  <div data-ng-controller="UserController as User">
-    <h1>{{ User.titulo }}</h1>
+  <div data-ng-controller="UserController">
+    <h1>{{ titulo }}</h1>
     <label>Busca: <input ng-model="searchUser"></label>
-    <button data-ng-click="User.add()">ADD User</button>
+    <button data-ng-click="add()">ADD User</button>
     <span data-ng-init="predicate = 'name'"></span>
     <table>
       <thead>
         <tr>
-          <th data-ng-repeat="(key, value) in User.users[0]">{{ key }}</th>
+          <th data-ng-repeat="(key, value) in users[0]">{{ key }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="user in User.users | orderBy:predicate:true | filter:searchUser">
+        <tr data-ng-repeat="user in users | orderBy:predicate:true | filter:searchUser">
           <td data-ng-repeat="(key, value) in user">{{ value | upper }}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div data-ng-controller="CursoController as Curso">
-    <h1>{{ Curso.titulo }}</h1>
+  <div data-ng-controller="CursoController">
+    <h1>{{ titulo }}</h1>
     <label>Busca: <input ng-model="searchCurso"></label>
-    <button data-ng-click="Curso.add()">ADD Curso</button>
+    <button data-ng-click="add()">ADD Curso</button>
     <span data-ng-init="reverse = 'name'"></span>
     <table>
       <thead>
         <tr>
-          <th data-ng-repeat="(key, value) in Curso.cursos[0]">{{ key }}</th>
+          <th data-ng-repeat="(key, value) in cursos[0]">{{ key }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="curso in Curso.cursos | orderBy:reverse:false | filter:searchCurso">
+        <tr data-ng-repeat="curso in cursos | orderBy:reverse:false | filter:searchCurso">
           <td data-ng-repeat="(key, value) in curso">{{ value | upper }}</td>
         </tr>
       </tbody>
@@ -53,33 +53,34 @@
     }
   });
 
-  function UserController() {
-    var vm = this;
-    vm.titulo = "ALUNOS";
-    vm.users = [
+  function UserController($scope) {
+    $scope.titulo = "ALUNOS";
+    $scope.users = [
       {name: 'marcus', email: 'marcus@oceanoweb.com.br', idade: '18'},
       {name: 'vinicius', email: 'vinicius@oceanoweb.com.br', idade: '21'},
       {name: 'gonçalves', email: 'goncalves@oceanoweb.com.br', idade: '25'}
     ];
-    vm.add = add;
+    $scope.add = add;
      function add(){
-       vm.users.push({name: 'Exemplo', email: 'exemplo@exemplo.com', idade: '00'})
+       $scope.users.push({name: 'Exemplo', email: 'exemplo@exemplo.com', idade: '00'})
      }
   }
+  UserController.$inject = ['$scope'];
 
-  function CursoController() {
-    var vm = this;
-    vm.titulo = "CURSOS";
-    vm.cursos = [
+  function CursoController($scope) {
+    $scope.titulo = "CURSOS";
+    $scope.cursos = [
       {name: 'Javascript', teacher: 'Marcus', apelido: 'Marquinhus'},
       {name: 'Node', teacher: 'Vinicius', apelido: 'Viny'},
       {name: 'Angular', teacher: 'Gonçalves', apelido: 'Gonza'}
     ];
-    vm.add = add;
+    $scope.add = add;
      function add(){
-       vm.cursos.push({name: 'Exemplo', teacher: 'exemplo@exemplo.com', apelido: 'exem'})
+       $scope.cursos.push({name: 'Exemplo', teacher: 'exemplo@exemplo.com', apelido: 'exem'})
      }
   }
+  CursoController.inject = ['$scope'];
+
   </script>
 </body>
 </html>

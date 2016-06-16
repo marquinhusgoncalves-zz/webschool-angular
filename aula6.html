@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR" data-ng-app="BeMEAN">
+<head>
+  <meta charset="UTF-8">
+  <title>Be MEAN</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <style>
+  .wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  </style>
+</head>
+<!-- Iniciando minha aplicação com ng-app -->
+<body>
+  <div data-ng-controller="UserController" class="row wrapper">
+    <h1>{{ titulo }}</h1>
+    <p class="col s12">
+      <label>
+        <input type="text" data-ng-model="form.name" placeholder="Nome">
+      </label>
+      <br>
+      <label>
+        <input type="email" data-ng-model="form.email" placeholder="E-mail">
+      </label>
+      <br>
+      <label>
+        <input type="text" data-ng-model="form.idade" placeholder="Idade">
+      </label>
+    </p>
+    <button data-ng-click="add(form)" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">ADD User</button>
+    <span data-ng-init="predicate = 'name'"></span>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="{{ keyslength + 1 }}">
+            <label>
+              <input ng-model="searchUser" placeholder="Search">
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>E-mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="user in users | orderBy:predicate:true | filter:searchUser">
+          <td>
+            <input type="checkbox" id="user-{{ $index }}" ng-model="user.selecionado">
+            <label for="user-{{ $index }}"></label>
+          </td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.idade }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button data-ng-click="remove(user.email)" class="btn btn-large red waves-effect waves-light col s12" type="submit" name="action">Remove</button>
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script>
+  angular.module('BeMEAN', [])
+  .controller('UserController', UserController)
+
+  function UserController($scope) {
+    $scope.titulo = "ALUNOS";
+    $scope.users = [
+      {name: 'marcus', email: 'marcus@oceanoweb.com.br', idade: '18'},
+      {name: 'vinicius', email: 'vinicius@oceanoweb.com.br', idade: '21'},
+      {name: 'gonçalves', email: 'goncalves@oceanoweb.com.br', idade: '25'}
+    ];
+    function getKeyLength() {
+      return Object.keys(angular.copy($scope.users[0])).length;
+    }
+    $scope.keyslength = getKeyLength();
+
+    $scope.add = add;
+    function add(user){
+      $scope.users.push(user)
+    };
+    $scope.remove = remove;
+    function remove(users) {
+      $scope.users = $scope.users.filter(function(el) {
+        return !el.selecionado
+      });
+    }
+  }
+  UserController.$inject = ['$scope'];
+  </script>
+</body>
+</html>
