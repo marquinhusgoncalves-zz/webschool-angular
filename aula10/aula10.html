@@ -74,7 +74,7 @@
         <br>
       </p>
       <button data-ng-click="User.add(User.form)" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">Add</button>
-      <button data-ng-hide="!User.btnSaving" data-ng-click="User.save(User.form)" class="btn btn-large blue waves-effect waves-light col s12 btnSaving" type="submit" name="action">Save</button>
+      <button data-ng-if="User.btnSaving" data-ng-click="User.save(User.form)" class="btn btn-large blue waves-effect waves-light col s12 btnSaving" type="submit" name="action">Save</button>
       <table>
         <thead>
           <tr>
