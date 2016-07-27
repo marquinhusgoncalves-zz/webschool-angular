@@ -59,6 +59,9 @@
   .strike {
     text-decoration: line-through;
   }
+  [disabled] {
+    background-color: #ccc !important;
+  }
   </style>
 </head>
 <!-- Iniciando minha aplicação com ng-app -->
@@ -82,7 +85,7 @@
         </label>
         <br>
       </p>
-      <button data-ng-click="User.add(User.form)" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">Add</button>
+      <button data-ng-disabled="User.editing" data-ng-click="User.add(User.form)" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">Add</button>
       <button data-ng-if="User.btnSaving" data-ng-click="User.save(User.form)" class="btn btn-large blue waves-effect waves-light col s12 btnSaving" type="submit" name="action">Save</button>
       <table>
         <thead>
@@ -172,7 +175,8 @@
       vm.form = angular.copy(user);
       vm.form.index = index;
       vm.btnSaving = true;
-      vm.btnEditing = false;
+      vm.btnEditing = true;
+      vm.editing= true;
     }
     vm.save = save;
     function save(user) {
