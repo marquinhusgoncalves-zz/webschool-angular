@@ -66,8 +66,11 @@
   <div data-ng-controller="UserController as User">
     <section class="row wrapper">
       <h1 data-ng-class="User.getTituloStyle()">{{ User.titulo }}</h1>
-    <select data-ng-model="User.selected">
-        <option value="{{ user.email }}" data-ng-repeat="user in User.users">{{ user.name }}</option>
+    <p>
+        Model: {{ User.selected }}
+    </p>
+    <select data-ng-model="User.selected" data-ng-options="user.email as user.name for user in User.users">
+        <option value="">Escolha um usuário</option>
     </select>
       <p class="col s12">
         <label>
