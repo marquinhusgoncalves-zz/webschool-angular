@@ -102,28 +102,18 @@
     </select>
             <form name="User.userForm" data-ng-submit="User.submitForm(User.form)">
                 <div data-ng-class="{'invalid' : User.form.name.$invalid && User.form.name.!$pristine}">
-                    <input type="text" name="phone" data-ng-pattern="User.regexPhone" data-ng-model="User.form.name" placeholder="Name" required>
-                    <p data-ng-show="User.userForm.phone.$error.required">
-                        Telefone obrigatório.
+                    <input type="text" name="phone" data-ng-pattern="User.regexPhone" data-ng-model="User.form.phone" placeholder="Phone" required>
+                    <p>
+                        User.userForm.phone.$error: {{ User.userForm.phone.$error }}
                     </p>
-                    <p data-ng-show="User.userForm.phone.$error.pattern">
-                        O telefone não esta no padrão.
-                    </p>
+                    <div data-ng-messages="User.userForm.phone.$error">
+                        <p data-ng-message="required">Telefone é obrigatório.</p>
+                        <p data-ng-message="pattern">O telefone não esta no padrão.</p>
+                    </div>
                 </div>
                 <div data-ng-class="{'invalid' : User.form.email.$invalid && User.form.name.!$pristine}">
                     <input type="email" name="email" data-ng-model="User.form.email" placeholder="Email">
                 </div>
-
-                <!--<p class="col s12">
-        <label>
-          <input type="text" data-ng-model="User.form.name" placeholder="Nome">
-        </label>
-        <br>
-        <label>
-          <input type="email" data-ng-model="User.form.email" placeholder="E-mail">
-        </label>
-        <br>
-      </p>-->
 
                 <button data-ng-disabled="User.editing || User.form.name.$pristine" class="btn btn-large green waves-effect waves-light col s12" type="submit" name="action">Add</button>
                 <button data-ng-if="User.btnSaving" data-ng-click="User.save(User.form)" class="btn btn-large blue waves-effect waves-light col s12 btnSaving" type="submit" name="action">Save</button>
@@ -166,8 +156,9 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-messages.js"></script>
     <script>
-        angular.module('BeMEAN', ['ngAnimate'])
+        angular.module('BeMEAN', ['ngAnimate', 'ngMessages'])
             .controller('UserController', UserController)
 
         function UserController() {
