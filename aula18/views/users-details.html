@@ -1,0 +1,8 @@
+<h2>Dados do usuário</h2>
+<form action="" method="" class="card-panel">
+    <fieldset>
+        <legend>Buscar o user pelo id: {{ UserDetails.routeParams.id }}</legend>
+        <label for="">Nome: </label>{{ UserDetails.users[UserDetails.routeParams.id].name}}
+        <label for="">E-Mail: </label>{{ UserDetails.users[UserDetails.routeParams.id].email}}
+    </fieldset>
+</form>
